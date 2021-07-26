@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Enterprise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>Рога и копыта</Name>
+  <Departments>
+    <Department>
+      <Name>Департамент №1</Name>
+      <HiglLevelDepartment>Рога и копыта</HiglLevelDepartment>
+    </Department>
+    <Department>
+      <Name>Департамент №2</Name>
+      <HiglLevelDepartment>Департамент №1</HiglLevelDepartment>
+    </Department>
+  </Departments>
+  <Persons>
+    <Person>
+      <Name>Сотрудник №1</Name>
+      <Position xsi:type="ManagerPosition">
+        <Description>Управляющий</Description>
+        <Department>Департамент №1</Department>
+      </Position>
+    </Person>
+    <Person>
+      <Name>Сотрудник №2</Name>
+      <Position xsi:type="ManagerPosition">
+        <Description>Управляющий</Description>
+        <Department>Департамент №2</Department>
+      </Position>
+    </Person>
+    <Person>
+      <Name>Сотрудник №3</Name>
+      <Position xsi:type="InternPosition">
+        <Description>Интерн</Description>
+        <Department>Департамент №1</Department>
+        <FixedPayment>800</FixedPayment>
+      </Position>
+    </Person>
+    <Person>
+      <Name>Сотрудник №4</Name>
+      <Position xsi:type="WorkmanPosition">
+        <Description>Рабочий</Description>
+        <Department>Департамент №1</Department>
+        <PaymentPerHour>15</PaymentPerHour>
+        <DefaultHours>160</DefaultHours>
+      </Position>
+    </Person>
+    <Person>
+      <Name>Сотрудник №5</Name>
+      <Position xsi:type="InternPosition">
+        <Description>Интерн</Description>
+        <Department>Департамент №2</Department>
+        <FixedPayment>500</FixedPayment>
+      </Position>
+    </Person>
+    <Person>
+      <Name>Сотрудник №6</Name>
+      <Position xsi:type="WorkmanPosition">
+        <Description>Рабочий</Description>
+        <Department>Департамент №2</Department>
+        <PaymentPerHour>5</PaymentPerHour>
+        <DefaultHours>160</DefaultHours>
+      </Position>
+    </Person>
+    <Person>
+      <Name>Сотрудник №7</Name>
+      <Position xsi:type="WorkmanPosition">
+        <Description>Рабочий</Description>
+        <Department>Департамент №1</Department>
+        <PaymentPerHour>25</PaymentPerHour>
+        <DefaultHours>160</DefaultHours>
+      </Position>
+    </Person>
+    <Person>
+      <Name>Сотрудник №8</Name>
+      <Position xsi:type="WorkmanPosition">
+        <Description>Рабочий</Description>
+        <Department>Департамент №1</Department>
+        <PaymentPerHour>35</PaymentPerHour>
+        <DefaultHours>160</DefaultHours>
+      </Position>
+    </Person>
+  </Persons>
+</Enterprise>

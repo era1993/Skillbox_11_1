@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="Controls\InternPositionControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\ManagerPositionControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\uiDepartments.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\uiISInfo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\uiPersons.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\uiPositionSelector.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\DepartmentPositionControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Controls\WorkmanPositionControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\uiPayments.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\InternPositionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\ManagerPositionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\uiDepartments.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\uiISInfo.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\uiPersons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\uiPositionSelector.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\DepartmentPositionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\WorkmanPositionControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\uiPayments.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

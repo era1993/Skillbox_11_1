@@ -1,0 +1,102 @@
+﻿<metro:MetroTabItem x:Class="EntertpriseIS.uiPersons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EntertpriseIS"
+             xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+                    Header="Сотрудники и должности">
+    <metro:MetroTabItem.Resources>
+        <local:TypenameConverter x:Key="xTypenameConverter"/>
+    </metro:MetroTabItem.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
+                Content="Добавить" Grid.Row="0" Click="AddNewPerson_Click"/>
+        <ListView ItemsSource="{Binding Path=Persons}" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="200"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"
+                                 Margin="5"
+                                 Grid.Column="0"
+                                 metro:TextBoxHelper.UseFloatingWatermark="True"
+                                 metro:TextBoxHelper.Watermark="ФИО сотрудника"/>
+                        <ContentControl DataContext="{Binding}" Content="{Binding}"
+                                        Grid.Column="1"
+                                        Margin="5">
+
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Setter Property="ContentTemplate">
+                                        <Setter.Value>
+                                            <DataTemplate>
+                                                <Grid >
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1*"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                        <ColumnDefinition Width="1*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <local:uiPositionSelector DataContext="{Binding}"/>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="ManagerPosition">
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <local:ManagerPositionControl/>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="InternPosition">
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <local:InternPositionControl/>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="WorkmanPosition">
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <local:WorkmanPositionControl/>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+
+
+                        </ContentControl>                        
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</metro:MetroTabItem>
