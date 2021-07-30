@@ -4,11 +4,11 @@
   <Departments>
     <Department>
       <Name>Департамент №1</Name>
-      <HiglLevelDepartment>Рога и копыта</HiglLevelDepartment>
+      <HighLevelDepartment>Рога и копыта</HighLevelDepartment>
     </Department>
     <Department>
       <Name>Департамент №2</Name>
-      <HiglLevelDepartment>Департамент №1</HiglLevelDepartment>
+      <HighLevelDepartment>Департамент №1</HighLevelDepartment>
     </Department>
   </Departments>
   <Persons>

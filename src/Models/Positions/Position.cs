@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.Windows.Input;
 using System.Xml.Serialization;
 
 namespace EntertpriseIS.Models
@@ -19,22 +15,25 @@ namespace EntertpriseIS.Models
         /// <summary>
         /// Наименование должности
         /// </summary>
-        private string description;
+        private string _description;
 
         /// <summary>
         /// Наименование департамента, которому принадлежит должность
         /// </summary>
-        private string department;
+        private string _department;
+
+
+        private ICommand _departmentSetCommand = null;
 
         /// <summary>
         /// Наименование должности
         /// </summary>
-        public string Description { set { description = value; RaisePropertyChanged("Description"); } get { return description; } }
+        public string Description { set { _description = value; RaisePropertyChanged("Description"); } get { return _description; } }
 
         /// <summary>
         /// Наименование департамента, которому принадлежит должность
         /// </summary>
-        public string Department { set { department = value; RaisePropertyChanged("Department"); } get { return department; } }
+        public string Department { set { _department = value; RaisePropertyChanged("Department"); } get { return _department; } }
 
         /// <summary>
         /// Сохраненный вариант расчета заработной платы
@@ -60,11 +59,17 @@ namespace EntertpriseIS.Models
             }
         }
 
+        [XmlIgnore]
+        public ICommand DepartmentSetCommand => _departmentSetCommand;
+
         public Position() : this(null, null) { }
         public Position(string description, string department)
         {
             Description = description;
             Department = department;
+            _departmentSetCommand = new ActionCommand(
+                department => Department = (department as Department).Name,
+                _ => true);
         }
 
         /// <summary>
@@ -75,6 +80,9 @@ namespace EntertpriseIS.Models
         public virtual void RefreshPayment()
         {
             payment = GetPayment();
+            RaisePropertyChanged("Payment");
         }
     }
+
+    
 }

@@ -12,7 +12,9 @@
                  Margin="5,0" Width="200"
                 metro:TextBoxHelper.UseFloatingWatermark="True"
                 metro:TextBoxHelper.Watermark="Наименование должности"/>
-        <local:DepartmentPositionControl Margin="5,0"/>
+        <local:DepartmentPositionControl Margin="5,0" 
+                                         Department="{Binding Path=Department}" 
+                                         DepartmentSetCommand="{Binding Path=DepartmentSetCommand}"/>
         <TextBox Text="{Binding Path=FixedPayment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  Margin="5,0"
                 metro:TextBoxHelper.UseFloatingWatermark="True"

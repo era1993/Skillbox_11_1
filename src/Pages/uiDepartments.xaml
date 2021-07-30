@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button Content="Добавить" Grid.Row="0" Click="AddNewDepartment_Click"/>
+        <Button Content="Добавить" Grid.Row="0" Command="{Binding Path=NewDepartmentCommand}"/>
         <ListView ItemsSource="{Binding Path=Departments}" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -22,33 +22,10 @@
                         <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"
                                  metro:TextBoxHelper.UseFloatingWatermark="True"
                                  metro:TextBoxHelper.Watermark="Наименование департамента"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox 
-                                Text="{Binding Path=HiglLevelDepartment, UpdateSourceTrigger=LostFocus, Mode=TwoWay}"
-                                Grid.Column="0"
-                                metro:TextBoxHelper.UseFloatingWatermark="True"
-                                metro:TextBoxHelper.Watermark="Входит в состав"/>
-                            <metro:SplitButton 
-                                ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListView}}, Path=ItemsSource}"
-                                Grid.Column="1"
-                                DisplayMemberPath="Name"
-                                SelectionChanged="SplitButton_SelectionChanged">
-                                <metro:SplitButton.Style >
-                                    <Style BasedOn="{StaticResource {x:Type metro:SplitButton}}"
-                                           TargetType="metro:SplitButton">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsFocused" Value="False">
-                                                <Setter Property="Width" Value="25"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </metro:SplitButton.Style>
-                            </metro:SplitButton>
-                        </Grid>
+                        <local:DepartmentPositionControl 
+                            Margin="5,0" 
+                            Department="{Binding Path=HighLevelDepartment}" 
+                            DepartmentSetCommand="{Binding Path=HighLevelDepartmentSetCommand}"/>                       
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

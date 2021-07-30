@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Input;
 using System.Xml.Serialization;
 
 namespace EntertpriseIS.Models
@@ -8,13 +10,18 @@ namespace EntertpriseIS.Models
     /// <summary>
     /// Базовый класс, описывающий некое подразделение
     /// </summary>
-    public class Department 
+    public class Department : INotifyPropertyChanged
     {
+        private string _highLevelDepartment;
+        private ICommand _departmentSetCommand = null;
         public Department() : this(null, null) { }
         public Department(string name, string highLevelDepartment)
         {
             Name = name;
-            HiglLevelDepartment = highLevelDepartment;
+            HighLevelDepartment = highLevelDepartment;
+            _departmentSetCommand = new ActionCommand(
+                department => HighLevelDepartment = (department as Department).Name,
+                _ => true);
         }
 
         /// <summary>
@@ -25,7 +32,7 @@ namespace EntertpriseIS.Models
         {
             get
             {
-                return new ObservableCollection<Department>( Enterprise.Current.Departments.Where(x => x.HiglLevelDepartment == Name));
+                return new ObservableCollection<Department>( Enterprise.Current.Departments.Where(x => x.HighLevelDepartment == Name));
             }
             set { }
         }
@@ -44,6 +51,7 @@ namespace EntertpriseIS.Models
             set { }
         }
 
+        [XmlIgnore] public ICommand HighLevelDepartmentSetCommand => _departmentSetCommand;
         /// <summary>
         /// Наименование подразделения
         /// </summary>
@@ -52,7 +60,10 @@ namespace EntertpriseIS.Models
         /// <summary>
         /// Подраздаление в состав которого оно входит. Для организации долнобыть равно null
         /// </summary>
-        public string HiglLevelDepartment { set; get; }
+        public string HighLevelDepartment { set { _highLevelDepartment = value; RaisePropertyChanged("HighLevelDepartment"); } get { return _highLevelDepartment; } }
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        protected void RaisePropertyChanged(string property) => PropertyChanged(this, new PropertyChangedEventArgs(property));
 
         /// <summary>
         /// Возвращает перечень всех сотрудников, включая дочерние подразделения

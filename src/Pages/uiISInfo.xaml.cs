@@ -7,9 +7,6 @@ namespace EntertpriseIS
     /// </summary>
     public partial class uiISInfo : MetroTabItem
     {
-        public uiISInfo()
-        {
-            InitializeComponent();
-        }
+        public uiISInfo() => InitializeComponent();
     }
 }

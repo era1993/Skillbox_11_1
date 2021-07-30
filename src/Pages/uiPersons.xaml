@@ -10,6 +10,32 @@
                     Header="Сотрудники и должности">
     <metro:MetroTabItem.Resources>
         <local:TypenameConverter x:Key="xTypenameConverter"/>
+
+        <DataTemplate x:Key="dtPositionSelector"> 
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="Управляющий" Grid.Column="0" x:Name="btnPositionManager" Command="{Binding Path=PositionSetCommand}" CommandParameter="Manager"/>
+                <Button Content="  Интерн   " Grid.Column="1" x:Name="btnPositionIntern"  Command="{Binding Path=PositionSetCommand}" CommandParameter="Intern"/>
+                <Button Content="  Рабочий  " Grid.Column="2" x:Name="btnPositionWorkman" Command="{Binding Path=PositionSetCommand}" CommandParameter="Workman"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="dtManagerPositon">
+            <local:ManagerPositionControl/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="dtInternPosition">
+            <local:InternPositionControl/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="dtWorkmanPosition">
+            <local:WorkmanPositionControl/>
+        </DataTemplate>
+
     </metro:MetroTabItem.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -17,7 +43,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
-                Content="Добавить" Grid.Row="0" Click="AddNewPerson_Click"/>
+                Content="Добавить" Grid.Row="0" Command="{Binding Path=NewPersonCommand}"/>
         <ListView ItemsSource="{Binding Path=Persons}" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -34,66 +60,26 @@
                         <ContentControl DataContext="{Binding}" Content="{Binding}"
                                         Grid.Column="1"
                                         Margin="5">
-
                             <ContentControl.Style>
-                                <Style TargetType="ContentControl">
-                                    <Setter Property="ContentTemplate">
-                                        <Setter.Value>
-                                            <DataTemplate>
-                                                <Grid >
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="1*"/>
-                                                        <ColumnDefinition Width="1*"/>
-                                                        <ColumnDefinition Width="1*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </Setter.Value>
-                                    </Setter>
+                                <Style TargetType="ContentControl">                                    
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
-                                            <Setter Property="ContentTemplate">
-                                                <Setter.Value>
-                                                    <DataTemplate>
-                                                        <local:uiPositionSelector DataContext="{Binding}"/>
-                                                    </DataTemplate>
-                                                </Setter.Value>
-                                            </Setter>
+                                            <Setter Property="ContentTemplate" Value="{StaticResource dtPositionSelector}"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="ManagerPosition">
-                                            <Setter Property="ContentTemplate">
-                                                <Setter.Value>
-                                                    <DataTemplate>
-                                                        <local:ManagerPositionControl/>
-                                                    </DataTemplate>
-                                                </Setter.Value>
-                                            </Setter>
+                                            <Setter Property="ContentTemplate" Value="{StaticResource dtManagerPositon}"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="InternPosition">
-                                            <Setter Property="ContentTemplate">
-                                                <Setter.Value>
-                                                    <DataTemplate>
-                                                        <local:InternPositionControl/>
-                                                    </DataTemplate>
-                                                </Setter.Value>
-                                            </Setter>
+                                            <Setter Property="ContentTemplate" Value="{StaticResource dtInternPosition}"/>
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="WorkmanPosition">
-                                            <Setter Property="ContentTemplate">
-                                                <Setter.Value>
-                                                    <DataTemplate>
-                                                        <local:WorkmanPositionControl/>
-                                                    </DataTemplate>
-                                                </Setter.Value>
-                                            </Setter>
+                                            <Setter Property="ContentTemplate" Value="{StaticResource dtWorkmanPosition}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </ContentControl.Style>
 
-
-                        </ContentControl>                        
-                        
+                        </ContentControl>                       
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

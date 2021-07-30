@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:EntertpriseIS"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid >
+    <Grid x:Name="mainCtrl">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="Auto"/>
@@ -17,21 +17,27 @@
             Grid.Column="0"
             metro:TextBoxHelper.UseFloatingWatermark="True"
             metro:TextBoxHelper.Watermark="Входит в состав"/>
-        <metro:SplitButton 
-                x:Name="btnDepartmentList"
-                Grid.Column="1"
-                DisplayMemberPath="Name"
-                SelectionChanged="SplitButton_SelectionChanged">
-            <metro:SplitButton.Style >
-                <Style BasedOn="{StaticResource {x:Type metro:SplitButton}}"
-                       TargetType="metro:SplitButton">
+        <metro:DropDownButton 
+            x:Name="btnDepartmentList"
+            ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Departments, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Column="1">
+            <metro:DropDownButton.Style >
+                <Style BasedOn="{StaticResource {x:Type metro:DropDownButton}}"
+                       TargetType="metro:DropDownButton">
                     <Style.Triggers>
                         <Trigger Property="IsFocused" Value="False">
                             <Setter Property="Width" Value="25"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
-            </metro:SplitButton.Style>
-        </metro:SplitButton>
+            </metro:DropDownButton.Style>
+            <metro:DropDownButton.ItemContainerStyle>
+                <Style TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}">
+                    <Setter Property="Header" Value="{Binding Name}"/>
+                    <Setter Property="Command" Value="{Binding DataContext.DepartmentSetCommand, RelativeSource={RelativeSource FindAncestor, AncestorType=Grid}}"/>
+                    <Setter Property="CommandParameter" Value="{Binding }"/>
+                </Style>
+            </metro:DropDownButton.ItemContainerStyle>
+        </metro:DropDownButton>        
     </Grid>
 </UserControl>

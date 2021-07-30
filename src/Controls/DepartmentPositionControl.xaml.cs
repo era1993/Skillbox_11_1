@@ -1,41 +1,46 @@
-﻿using EntertpriseIS.Models;
-using M=MahApps.Metro.Controls;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EntertpriseIS
 {
     /// <summary>
     /// Логика взаимодействия для UserControl1.xaml
     /// </summary>
-    public partial class DepartmentPositionControl : UserControl
+    public partial class DepartmentPositionControl : UserControl, INotifyPropertyChanged
     {
         public DepartmentPositionControl()
         {
             InitializeComponent();
-            btnDepartmentList.ItemsSource = Enterprise.Current.Departments;
-            btnDepartmentList.DataContext = Enterprise.Current.Departments;
-
+            mainCtrl.DataContext = this;
         }
 
+        public static readonly DependencyProperty DepartmentProperty =
+            DependencyProperty.Register(
+                "Department", typeof(object),
+                typeof(DepartmentPositionControl)
+                );
 
-        private void SplitButton_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public static readonly DependencyProperty DepartmentSetCommandProperty =
+            DependencyProperty.Register(
+                "DepartmentSetCommand", typeof(ICommand),
+                typeof(DepartmentPositionControl)
+                );
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        protected void RaisePropertyChanged(string property) => PropertyChanged(this, new PropertyChangedEventArgs(property));
+
+        public object Department
         {
-            Department selected = (sender as M.SplitButton).SelectedValue as Department;
-            Position position = this.DataContext as Position;
-            position.Department = selected.Name;
+            get { return GetValue(DepartmentProperty); }
+            set { SetValue(DepartmentProperty, value); RaisePropertyChanged("Department"); }
+        }
+
+        public ICommand DepartmentSetCommand
+        {
+            get { return (ICommand)GetValue(DepartmentSetCommandProperty); }
+            set { SetValue(DepartmentSetCommandProperty, value); RaisePropertyChanged("DepartmentSetCommand"); }
         }
     }
 }

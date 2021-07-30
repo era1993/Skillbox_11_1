@@ -17,9 +17,6 @@
     <Compile Update="Pages\uiPersons.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\uiPositionSelector.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Controls\DepartmentPositionControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -44,9 +41,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\uiPersons.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Controls\uiPositionSelector.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\DepartmentPositionControl.xaml">

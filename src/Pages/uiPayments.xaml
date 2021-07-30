@@ -18,8 +18,8 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Button Style="{StaticResource MahApps.Styles.Button.Square.Accent}"
-                Content="Обновить" Grid.Row="0" Click="Refresh_Click"/>
-        <ListView ItemsSource="{Binding Path=Persons}" Grid.Row="1">
+                Content="Обновить" Grid.Row="0" Command="{Binding Path=UpdatePaymentCommand}"/>
+        <ListView ItemsSource="{Binding Path=Persons, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -52,7 +52,7 @@
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <TextBox Text="{Binding Path=., StringFormat={}{0} $, Converter={StaticResource xPersonPaymentConverter}}"
+                        <TextBox Text="{Binding Path=Position.Payment, StringFormat={}{0} $, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource xPersonPaymentConverter}}"
                                  metro:TextBoxHelper.UseFloatingWatermark="True"
                                  metro:TextBoxHelper.Watermark="Рассчитанная зарплата"
                                  Grid.Column="2"/>
