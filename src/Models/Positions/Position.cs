@@ -10,41 +10,22 @@ namespace EntertpriseIS.Models
     [XmlInclude(typeof(ManagerPosition))]
     [XmlInclude(typeof(InternPosition))]
     [XmlInclude(typeof(WorkmanPosition))]
-    public abstract class Position : INotifyPropertyChanged
+    public abstract class Position 
     {
-        /// <summary>
-        /// Наименование должности
-        /// </summary>
-        private string _description;
-
-        /// <summary>
-        /// Наименование департамента, которому принадлежит должность
-        /// </summary>
-        private string _department;
-
-
-        private ICommand _departmentSetCommand = null;
-
-        /// <summary>
-        /// Наименование должности
-        /// </summary>
-        public string Description { set { _description = value; RaisePropertyChanged("Description"); } get { return _description; } }
-
-        /// <summary>
-        /// Наименование департамента, которому принадлежит должность
-        /// </summary>
-        public string Department { set { _department = value; RaisePropertyChanged("Department"); } get { return _department; } }
-
         /// <summary>
         /// Сохраненный вариант расчета заработной платы
         /// </summary>
         private IPayment payment;
 
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        protected void RaisePropertyChanged(string property)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
+        /// <summary>
+        /// Наименование должности
+        /// </summary>
+        public string Description { set; get; }
+
+        /// <summary>
+        /// Наименование департамента, которому принадлежит должность
+        /// </summary>
+        public string Department { set; get; }
 
         /// <summary>
         /// Вариант расчета заработной платы
@@ -59,17 +40,12 @@ namespace EntertpriseIS.Models
             }
         }
 
-        [XmlIgnore]
-        public ICommand DepartmentSetCommand => _departmentSetCommand;
 
         public Position() : this(null, null) { }
         public Position(string description, string department)
         {
             Description = description;
             Department = department;
-            _departmentSetCommand = new ActionCommand(
-                department => Department = (department as Department).Name,
-                _ => true);
         }
 
         /// <summary>
@@ -80,9 +56,47 @@ namespace EntertpriseIS.Models
         public virtual void RefreshPayment()
         {
             payment = GetPayment();
-            RaisePropertyChanged("Payment");
         }
     }
 
-    
+    public class PositionViewModel : INotifyPropertyChanged
+    {
+        public Position Value { get; private set; }
+        private ICommand _departmentSetCommand = null;
+
+        public ICommand DepartmentSetCommand => _departmentSetCommand;
+
+        /// <summary>
+        /// Наименование должности
+        /// </summary>
+        public string Description { set { Value.Description = value; RaisePropertyChanged("Description"); } get => Value.Description; }
+
+        /// <summary>
+        /// Наименование департамента, которому принадлежит должность
+        /// </summary>
+        public string Department { set { Value.Department = value; RaisePropertyChanged("Department"); } get => Value.Department; }
+
+        public IPayment Payment { get => Value.Payment; }
+
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        protected void RaisePropertyChanged(string property)
+        {
+            PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
+        public virtual void RefreshPayment()
+        {
+            Value.RefreshPayment();
+            RaisePropertyChanged("Payment");
+        }
+
+        public PositionViewModel(Position position)
+        {
+            Value = position;
+            _departmentSetCommand = new ActionCommand(
+                department => Department = (department as Department).Name,
+                _ => Value != null);
+        }
+    }
 }

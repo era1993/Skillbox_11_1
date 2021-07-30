@@ -19,4 +19,9 @@
             return new ManagerPayment(Department);
         }
     }
+
+    public class ManagerPositionViewModel : PositionViewModel
+    {
+        public ManagerPositionViewModel(ManagerPosition position) : base(position) { }
+    }
 }

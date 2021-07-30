@@ -8,30 +8,12 @@
         /// <summary>
         /// Зарплата за час
         /// </summary>
-        private double paymentPerHour;
+        public double PaymentPerHour { set; get; }
 
         /// <summary>
         /// Базовая ставка рабочего в часах
         /// </summary>
-        private double defaultHours;
-
-        /// <summary>
-        /// Зарплата за час
-        /// </summary>
-        public double PaymentPerHour 
-        {
-            set { paymentPerHour = value; RaisePropertyChanged("PaymentPerHour"); }
-            get { return paymentPerHour; } 
-        }
-
-        /// <summary>
-        /// Базовая ставка рабочего в часах
-        /// </summary>
-        public double DefaultHours
-        {
-            set { defaultHours = value; RaisePropertyChanged("DefaultHours"); }
-            get { return defaultHours; }
-        }
+        public double DefaultHours { set; get; }
 
         public WorkmanPosition() : this(null, null, 0, 0) { }
         public WorkmanPosition(string description, string department, double paymentPerHour, double defaultHours)
@@ -48,6 +30,29 @@
         protected override IPayment GetPayment()
         {
             return new WorkmanPayment(PaymentPerHour, DefaultHours);
+        }
+    }
+
+    public class WorkmanPositionViewModel : PositionViewModel
+    {
+        public WorkmanPositionViewModel(WorkmanPosition position) : base(position) { }
+
+        /// <summary>
+        /// Зарплата за час
+        /// </summary>
+        public double PaymentPerHour
+        {
+            set { (Value as WorkmanPosition).PaymentPerHour = value; RaisePropertyChanged("PaymentPerHour"); }
+            get { return (Value as WorkmanPosition).PaymentPerHour; }
+        }
+
+        /// <summary>
+        /// Базовая ставка рабочего в часах
+        /// </summary>
+        public double DefaultHours
+        {
+            set { (Value as WorkmanPosition).DefaultHours = value; RaisePropertyChanged("DefaultHours"); }
+            get { return (Value as WorkmanPosition).DefaultHours; }
         }
     }
 }

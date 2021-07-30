@@ -2,54 +2,54 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Controls\InternPositionControl.xaml.cs">
+    <Compile Update="Views\Positions\InternPositionControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\ManagerPositionControl.xaml.cs">
+    <Compile Update="Views\Positions\ManagerPositionControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\uiDepartments.xaml.cs">
+    <Compile Update="Views\uiDepartments.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\uiISInfo.xaml.cs">
+    <Compile Update="Views\uiISInfo.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\uiPersons.xaml.cs">
+    <Compile Update="Views\uiPersons.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\DepartmentPositionControl.xaml.cs">
+    <Compile Update="Views\Positions\DepartmentPositionControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Controls\WorkmanPositionControl.xaml.cs">
+    <Compile Update="Views\Positions\WorkmanPositionControl.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Pages\uiPayments.xaml.cs">
+    <Compile Update="Views\uiPayments.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\InternPositionControl.xaml">
+    <Page Update="Views\Positions\InternPositionControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\ManagerPositionControl.xaml">
+    <Page Update="Views\Positions\ManagerPositionControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\uiDepartments.xaml">
+    <Page Update="Views\uiDepartments.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\uiISInfo.xaml">
+    <Page Update="Views\uiISInfo.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\uiPersons.xaml">
+    <Page Update="Views\uiPersons.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\DepartmentPositionControl.xaml">
+    <Page Update="Views\Positions\DepartmentPositionControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Controls\WorkmanPositionControl.xaml">
+    <Page Update="Views\Positions\WorkmanPositionControl.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Pages\uiPayments.xaml">
+    <Page Update="Views\uiPayments.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

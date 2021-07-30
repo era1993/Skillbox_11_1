@@ -47,7 +47,7 @@ namespace EntertpriseIS
                 {
                     Enterprise.Current = new Enterprise();
                 }
-                this.DataContext = Enterprise.Current;
+                this.DataContext = new EnterpriseViewModel(Enterprise.Current);
             }
             catch (Exception ex)
             {

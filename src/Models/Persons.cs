@@ -8,49 +8,64 @@ namespace EntertpriseIS.Models
     /// <summary>
     /// Класс сотрудника
     /// </summary>
-    public class Person : INotifyPropertyChanged
+    public class Person
     {
-        private ICommand _positionSetCommand = null;
-        /// <summary>
-        /// Должность сотрудника
-        /// </summary>
-        private Position position;
-
         /// <summary>
         /// ФИО сотрудника
         /// </summary>
         public string Name { set; get; }
 
-        [XmlIgnore]
-        public ICommand PositionSetCommand => _positionSetCommand;
-
         /// <summary>
         /// Должность сотрудника
         /// </summary>
-        public Position Position { set { position = value; RaisePropertyChanged("Position"); } get { return position; } }
+        public Position Position { set; get; }
 
-        public Person() : this(null) 
-        { }
-        public Person(string name)
+        public Person() : this(null) { }
+        public Person(string name) => Name = name;
+
+    }
+
+    public class PersonViewModel : INotifyPropertyChanged
+    {
+        public Person Value { get; private set; }
+        private ICommand _positionSetCommand = null;
+        public ICommand PositionSetCommand => _positionSetCommand;
+
+        /// <summary>
+        /// ФИО сотрудника
+        /// </summary>
+        public string Name { set { Value.Name = value; RaisePropertyChanged("Name"); } get => Value.Name; }
+        public PositionViewModel Position { set; get; }
+
+
+        public PersonViewModel(Person person)
         {
-            Name = name;
+            Value = person;
             _positionSetCommand = new ActionCommand(
                 parameter =>
                 {
                     switch (parameter as string)
                     {
-                        case "Manager": Position = new ManagerPosition("Управляющий", Enterprise.Current.Name); break;
-                        case "Intern": Position = new InternPosition("Интерн", Enterprise.Current.Name, 500); break;
-                        case "Workman": Position = new WorkmanPosition("Рабочий", Enterprise.Current.Name, 5, 160); break;
+                        case "Manager": Value.Position = new ManagerPosition("Управляющий", Enterprise.Current.Name); break;
+                        case "Intern": Value.Position = new InternPosition("Интерн", Enterprise.Current.Name, 500); break;
+                        case "Workman": Value.Position = new WorkmanPosition("Рабочий", Enterprise.Current.Name, 5, 160); break;
                     }
+                    RaisePropertyChanged("Position");
                 },
-                _ => true
+                _ => Value != null
                 );
+            if (Value.Position is InternPosition ip)
+                Position = new InternPositionViewModel(ip);
+            if (Value.Position is ManagerPosition mp)
+                Position = new ManagerPositionViewModel(mp);
+            if (Value.Position is WorkmanPosition wp)
+                Position = new WorkmanPositionViewModel(wp);
+            else
+                Position = new PositionViewModel(Value.Position);
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
         public void RaisePropertyChanged(string property) { PropertyChanged(this, new PropertyChangedEventArgs(property)); }
     }
 
-    
 }

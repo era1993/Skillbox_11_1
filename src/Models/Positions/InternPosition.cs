@@ -12,7 +12,7 @@
         /// <summary>
         /// Размер фиксированной зарплаты
         /// </summary>
-        public double FixedPayment { set { fixedPayment = value; RaisePropertyChanged("FixedPayment"); } get { return fixedPayment; } }
+        public double FixedPayment { set; get; }
         public InternPosition() : this(null, null, 0) { }
         public InternPosition(string description, string department, double fixedPayment)
             : base(description, department)
@@ -28,5 +28,11 @@
         {
             return new InternPayment(FixedPayment);
         }
+    }
+
+    public class InternPositionViewModel : PositionViewModel
+    {
+        public InternPositionViewModel(InternPosition position) : base(position) { }
+        public double FixedPayment { set { (Value as InternPosition).FixedPayment = value; RaisePropertyChanged("FixedPayment"); } get { return (Value as InternPosition).FixedPayment; } }    
     }
 }
