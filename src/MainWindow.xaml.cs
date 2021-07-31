@@ -1,20 +1,10 @@
 ﻿using EntertpriseIS.Models;
+using EntertpriseIS.ViewModels;
 using MahApps.Metro.Controls;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Xml.Serialization;
 
 namespace EntertpriseIS
@@ -36,18 +26,26 @@ namespace EntertpriseIS
         {
             try
             {
+                Enterprise current = null;
                 if (File.Exists(dataPath))
                 {
                     XmlSerializer xs = new XmlSerializer(typeof(Enterprise));
                     using (FileStream fs = File.OpenRead(dataPath))
                     using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
-                        Enterprise.Current = xs.Deserialize(sr) as Enterprise;
+                        current = xs.Deserialize(sr) as Enterprise;
                 }
-                if (Enterprise.Current == null)
+                if (current == null)
                 {
-                    Enterprise.Current = new Enterprise();
+                    current = new Enterprise();
                 }
-                this.DataContext = new EnterpriseViewModel(Enterprise.Current);
+                foreach (var i in current.Persons)
+                {
+                    i.Enterprise = current;
+                    i.Position.Enterprise = current;
+                }
+                foreach (var i in current.Departments)
+                    i.Enterprise = current;
+                this.DataContext = new EnterpriseViewModel(current);
             }
             catch (Exception ex)
             {
@@ -63,7 +61,7 @@ namespace EntertpriseIS
                 XmlSerializer xs = new XmlSerializer(typeof(Enterprise));
                 using (FileStream fs = File.Create(dataPath))
                 using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
-                    xs.Serialize(sw, Enterprise.Current);
+                    xs.Serialize(sw, (this.DataContext as EnterpriseViewModel).Value);
             }
             catch (Exception ex)
             {

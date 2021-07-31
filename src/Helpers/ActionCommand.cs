@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace EntertpriseIS
@@ -22,6 +18,12 @@ namespace EntertpriseIS
         {
             _execute = execute;
             _canExecute = canExecute;
+        }
+
+        protected void RaiseCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, EventArgs.Empty);
         }
     }
 }

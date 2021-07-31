@@ -10,6 +10,10 @@
       <Name>Департамент №2</Name>
       <HighLevelDepartment>Департамент №1</HighLevelDepartment>
     </Department>
+    <Department>
+      <Name>Департамент №3</Name>
+      <HighLevelDepartment>Департамент №1</HighLevelDepartment>
+    </Department>
   </Departments>
   <Persons>
     <Person>
@@ -75,6 +79,15 @@
         <Description>Рабочий</Description>
         <Department>Департамент №1</Department>
         <PaymentPerHour>35</PaymentPerHour>
+        <DefaultHours>160</DefaultHours>
+      </Position>
+    </Person>
+    <Person>
+      <Name>Сотрудник №9</Name>
+      <Position xsi:type="WorkmanPosition">
+        <Description>Рабочий</Description>
+        <Department>Департамент №3</Department>
+        <PaymentPerHour>5</PaymentPerHour>
         <DefaultHours>160</DefaultHours>
       </Position>
     </Person>

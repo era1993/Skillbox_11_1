@@ -5,9 +5,9 @@
     /// </summary>
     public class ManagerPosition : Position
     {
-        public ManagerPosition() : this(null, null) { }
-        public ManagerPosition(string description, string department)
-            : base(description, department)
+        public ManagerPosition() : this(null, null, null) { }
+        public ManagerPosition(string description, string department, Enterprise enterprise)
+            : base(description, department, enterprise)
         { }
 
         /// <summary>
@@ -16,12 +16,7 @@
         /// <returns></returns>
         protected override IPayment GetPayment()
         {
-            return new ManagerPayment(Department);
+            return this.Enterprise == null ? null : new ManagerPayment(Enterprise.DepartmentByName(Department));
         }
-    }
-
-    public class ManagerPositionViewModel : PositionViewModel
-    {
-        public ManagerPositionViewModel(ManagerPosition position) : base(position) { }
     }
 }

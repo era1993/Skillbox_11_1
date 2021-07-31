@@ -24,8 +24,8 @@ namespace EntertpriseIS.Models
         /// <summary>
         /// Наименование подразделения, которым руководит сотрудник
         /// </summary>
-        private string _department;
-        public ManagerPayment(string department)
+        private Department _department;
+        public ManagerPayment(Department department)
         {
             _department = department;
         }
@@ -37,10 +37,9 @@ namespace EntertpriseIS.Models
         public double Calculate()
         {
             double sumPayment = 0;
-            Department department = Enterprise.Current.Departments.Single(x => x.Name == _department) as Department;
             if (IncludeChildDepartments)
             {
-                foreach (Person person in department.EnumeratePersons())
+                foreach (Person person in _department.EnumeratePersons())
                 {
                     if (!(person.Position is ManagerPosition))
                         sumPayment += person.Position.Payment.Calculate();
@@ -48,7 +47,7 @@ namespace EntertpriseIS.Models
             }
             else
             {
-                foreach (Person person in department.Persons)
+                foreach (Person person in _department.Persons)
                 {
                     if (!(person.Position is ManagerPosition))
                         sumPayment += person.Position.Payment.Calculate();

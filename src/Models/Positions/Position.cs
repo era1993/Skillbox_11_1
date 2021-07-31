@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows.Input;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace EntertpriseIS.Models
 {
@@ -40,12 +38,15 @@ namespace EntertpriseIS.Models
             }
         }
 
+        [XmlIgnore] public Enterprise Enterprise { set; get; }
 
-        public Position() : this(null, null) { }
-        public Position(string description, string department)
+
+        public Position() : this(null, null, null) { }
+        public Position(string description, string department, Enterprise enterprise)
         {
             Description = description;
             Department = department;
+            Enterprise = enterprise;
         }
 
         /// <summary>
@@ -57,46 +58,5 @@ namespace EntertpriseIS.Models
         {
             payment = GetPayment();
         }
-    }
-
-    public class PositionViewModel : INotifyPropertyChanged
-    {
-        public Position Value { get; private set; }
-        private ICommand _departmentSetCommand = null;
-
-        public ICommand DepartmentSetCommand => _departmentSetCommand;
-
-        /// <summary>
-        /// Наименование должности
-        /// </summary>
-        public string Description { set { Value.Description = value; RaisePropertyChanged("Description"); } get => Value.Description; }
-
-        /// <summary>
-        /// Наименование департамента, которому принадлежит должность
-        /// </summary>
-        public string Department { set { Value.Department = value; RaisePropertyChanged("Department"); } get => Value.Department; }
-
-        public IPayment Payment { get => Value.Payment; }
-
-
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
-        protected void RaisePropertyChanged(string property)
-        {
-            PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
-
-        public virtual void RefreshPayment()
-        {
-            Value.RefreshPayment();
-            RaisePropertyChanged("Payment");
-        }
-
-        public PositionViewModel(Position position)
-        {
-            Value = position;
-            _departmentSetCommand = new ActionCommand(
-                department => Department = (department as Department).Name,
-                _ => Value != null);
-        }
-    }
+    }    
 }

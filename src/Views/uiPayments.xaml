@@ -9,7 +9,6 @@
              d:DesignHeight="450" d:DesignWidth="800"
                      Header="Расчет зарплаты">
     <metro:MetroTabItem.Resources>
-        <local:PersonPaymentConverter x:Key="xPersonPaymentConverter"/>
         <local:TypenameConverter x:Key="xTypenameConverter"/>
     </metro:MetroTabItem.Resources>
     <Grid>
@@ -39,20 +38,20 @@
                             <TextBox.Style >
                                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type TextBox}}">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=Position, Converter={StaticResource xTypenameConverter}}" Value="ManagerPosition">
+                                        <DataTrigger Binding="{Binding Path=Position, Converter={StaticResource xTypenameConverter}}" Value="ManagerPositionViewModel">
                                             <Setter Property="Text" Value="Управляющий"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=Position, Converter={StaticResource xTypenameConverter}}" Value="InternPosition">
+                                        <DataTrigger Binding="{Binding Path=Position, Converter={StaticResource xTypenameConverter}}" Value="InternPositionViewModel">
                                             <Setter Property="Text" Value="Интерн"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=Position, Converter={StaticResource xTypenameConverter}}" Value="WorkmanPosition">
+                                        <DataTrigger Binding="{Binding Path=Position, Converter={StaticResource xTypenameConverter}}" Value="WorkmanPositionViewModel">
                                             <Setter Property="Text" Value="Рабочий"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </TextBox.Style>
                         </TextBox>
-                        <TextBox Text="{Binding Path=Position.Payment, StringFormat={}{0} $, UpdateSourceTrigger=PropertyChanged, Mode=OneWay, Converter={StaticResource xPersonPaymentConverter}}"
+                        <TextBox Text="{Binding Path=Position.Payment, StringFormat={}{0} $, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
                                  metro:TextBoxHelper.UseFloatingWatermark="True"
                                  metro:TextBoxHelper.Watermark="Рассчитанная зарплата"
                                  Grid.Column="2"/>

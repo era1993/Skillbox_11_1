@@ -66,13 +66,13 @@
                                         <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged}" Value="{x:Null}">
                                             <Setter Property="ContentTemplate" Value="{StaticResource dtPositionSelector}"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="ManagerPosition">
+                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="ManagerPositionViewModel">
                                             <Setter Property="ContentTemplate" Value="{StaticResource dtManagerPositon}"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="InternPosition">
+                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="InternPositionViewModel">
                                             <Setter Property="ContentTemplate" Value="{StaticResource dtInternPosition}"/>
                                         </DataTrigger>
-                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="WorkmanPosition">
+                                        <DataTrigger Binding="{Binding Path=Position, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource xTypenameConverter}}" Value="WorkmanPositionViewModel">
                                             <Setter Property="ContentTemplate" Value="{StaticResource dtWorkmanPosition}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
