@@ -11,6 +11,9 @@ namespace EntertpriseIS.ViewModels
     /// </summary>
     public class DepartmentViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Объект представления
+        /// </summary>
         public Department Value { get; private set; }
         private ICommand _departmentSetCommand = null;
         public DepartmentViewModel(Department department)
@@ -33,6 +36,9 @@ namespace EntertpriseIS.ViewModels
         /// </summary>
         public virtual ObservableCollection<PersonViewModel> Persons { get; }
 
+        /// <summary>
+        /// Команда по установлению головного подразделения
+        /// </summary>
         public ICommand HighLevelDepartmentSetCommand => _departmentSetCommand;
         /// <summary>
         /// Наименование подразделения

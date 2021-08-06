@@ -8,10 +8,13 @@ namespace EntertpriseIS.Models
     /// </summary>
     public class Enterprise : Department
     {
-        //private static Enterprise _currentEnterprise;
-
         public Enterprise() : base(null, null) { }
 
+        /// <summary>
+        /// Поиск департамента по его уникальному имени
+        /// </summary>
+        /// <param name="name">Уникальное имя департамента</param>
+        /// <returns>Объект департамента</returns>
         public Department DepartmentByName(string name) => Departments.Single(x => x.Name == name);
         /// <summary>
         /// Список всех подразделений в организации

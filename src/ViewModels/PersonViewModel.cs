@@ -6,14 +6,23 @@ namespace EntertpriseIS.ViewModels
 {
     public class PersonViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Объект представления
+        /// </summary>
         public Person Value { get; private set; }
         private ICommand _positionSetCommand = null;
+        /// <summary>
+        /// Команда на смену должности
+        /// </summary>
         public ICommand PositionSetCommand => _positionSetCommand;
 
         /// <summary>
         /// ФИО сотрудника
         /// </summary>
         public string Name { set { Value.Name = value; RaisePropertyChanged("Name"); } get => Value.Name; }
+        /// <summary>
+        /// Модель представления должности
+        /// </summary>
         public PositionViewModel Position { set; get; }
 
         public PersonViewModel(Person person)

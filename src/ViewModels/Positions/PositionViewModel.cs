@@ -6,9 +6,14 @@ namespace EntertpriseIS.ViewModels
 {
     public class PositionViewModel : INotifyPropertyChanged
     {
+        /// <summary>
+        /// Объект представления
+        /// </summary>
         public Position Value { get; private set; }
         private ICommand _departmentSetCommand = null;
-
+        /// <summary>
+        /// Команда установки департамента объекту предсставления
+        /// </summary>
         public ICommand DepartmentSetCommand => _departmentSetCommand;
 
         /// <summary>
@@ -21,6 +26,9 @@ namespace EntertpriseIS.ViewModels
         /// </summary>
         public string Department { set { Value.Department = value; RaisePropertyChanged("Department"); } get => Value.Department; }
 
+        /// <summary>
+        /// Модель представления метода расчета зарплаты
+        /// </summary>
         public PaymentViewModel Payment { get; private set; }
 
 
@@ -45,16 +53,5 @@ namespace EntertpriseIS.ViewModels
                 _ => Value != null);
             RefreshPayment();
         }
-    }
-
-    public class PaymentViewModel
-    {
-        private IPayment _payment;
-
-        public double Payment => _payment.Calculate();
-
-        public PaymentViewModel(IPayment payment) => _payment = payment;
-
-        public override string ToString() => Payment.ToString();
     }
 }

@@ -38,6 +38,9 @@ namespace EntertpriseIS.Models
             }
         }
 
+        /// <summary>
+        /// Ссылка на организацию, которой принадлежит должность
+        /// </summary>
         [XmlIgnore] public Enterprise Enterprise { set; get; }
 
 

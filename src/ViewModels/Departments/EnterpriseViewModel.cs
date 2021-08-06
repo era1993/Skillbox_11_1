@@ -5,6 +5,9 @@ using System.Windows.Input;
 
 namespace EntertpriseIS.ViewModels
 {
+    /// <summary>
+    /// Модель представления Организации
+    /// </summary>
     public class EnterpriseViewModel : DepartmentViewModel
     {
         private Enterprise _enterprise;
@@ -12,8 +15,19 @@ namespace EntertpriseIS.ViewModels
         private ICommand _commandNewDepartment = null;
         private ICommand _commandUpdatePayment = null;
 
+        /// <summary>
+        /// Команда по добавлению нового сотрудника
+        /// </summary>
         public ICommand NewPersonCommand => _commandNewPerson;
+
+        /// <summary>
+        /// Команда по добавлению нового подразделения
+        /// </summary>
         public ICommand NewDepartmentCommand => _commandNewDepartment;
+
+        /// <summary>
+        /// Команда по формированию расчетов по заработной плате
+        /// </summary>
         public ICommand UpdatePaymentCommand => _commandUpdatePayment;
 
         /// <summary>
