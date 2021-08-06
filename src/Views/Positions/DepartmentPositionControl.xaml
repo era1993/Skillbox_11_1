@@ -19,7 +19,7 @@
             metro:TextBoxHelper.Watermark="Входит в состав"/>
         <metro:DropDownButton 
             x:Name="btnDepartmentList"
-            ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.Departments, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.ViewModel.Departments, UpdateSourceTrigger=PropertyChanged}"
             Grid.Column="1">
             <metro:DropDownButton.Style >
                 <Style BasedOn="{StaticResource {x:Type metro:DropDownButton}}"

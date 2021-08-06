@@ -38,6 +38,7 @@ namespace EntertpriseIS.ViewModels
             foreach (PersonViewModel p in Persons)
                 p.Position.RefreshPayment();
         }
+
         public EnterpriseViewModel(Enterprise enterprise) : base(enterprise)
         {
             _enterprise = enterprise;

@@ -87,7 +87,7 @@
       <Position xsi:type="WorkmanPosition">
         <Description>Рабочий</Description>
         <Department>Департамент №3</Department>
-        <PaymentPerHour>5</PaymentPerHour>
+        <PaymentPerHour>6</PaymentPerHour>
         <DefaultHours>160</DefaultHours>
       </Position>
     </Person>

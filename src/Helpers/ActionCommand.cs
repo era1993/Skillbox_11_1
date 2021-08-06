@@ -20,7 +20,7 @@ namespace EntertpriseIS
             _canExecute = canExecute;
         }
 
-        protected void RaiseCanExecuteChanged()
+        public void RaiseCanExecuteChanged()
         {
             if (CanExecuteChanged != null)
                 CanExecuteChanged(this, EventArgs.Empty);
